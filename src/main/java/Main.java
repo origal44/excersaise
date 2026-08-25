@@ -13,8 +13,15 @@ public class Main {
             System.out.println("pls enter a valid number");
 
         }
-        else{
-            for(Drinks)
+        else {
+            Drinks var = null;
+            for (Drinks drink : Drinks.values()) {
+                if (drink.GetCode() == code) {
+                    var = drink;
+                    break;
+                }
+            }
+            System.out.println("you chose : " + var);
         }
 
         }
