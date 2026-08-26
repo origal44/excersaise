@@ -65,6 +65,7 @@ public class BreakfastMain {
 
             }
             System.out.println("person " + (index+1) + " your total is " + max);
+            max =0;
             arraysum[index] =0;
 
         }
