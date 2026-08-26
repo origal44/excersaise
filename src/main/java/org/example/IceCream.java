@@ -15,35 +15,57 @@ public class IceCream {
             System.exit(0);
         }
 
-        System.out.println("which of the following flavros would you like ");
+        System.out.println("this is our options:");
 
         for(Flavors flavor : Flavors.values()) {
             System.out.print(flavor + " " + flavor.GetCode() + " ");
         }
 
-        answer = scanner.nextInt();
-        int count = balls - 1;
-        int flag = 0;
-        if (answer > 4 || answer < 0) {
-            System.out.println("pls enter an actuall flavor");
-            ++count;
-            flag = 1;
-        }
 
-        if (flag == 0) {
-            int var10002 = array[answer]++;
-        }
+        int count = balls;
 
         while(count != 0) {
-            System.out.println("enter a flavor");
+            System.out.println(" please enter a flavor");
             answer = scanner.nextInt();
-             array[answer]++;
-            --count;
+            if(answer<5 && answer>=0)
+            {
+                array[answer]++;
+                count--;
+            }
+            else{
+                System.out.println("Error this flavor doesnt exist ");
+            }
+
+        }
+        int max=-0;
+        int done=0;
+        int index =0;
+
+        Flavors[] tam = {Flavors.chocolate,Flavors.vanilla,Flavors.oreos,Flavors.ferro,Flavors.strawberry};
+
+        while(done<array.length)
+        {
+            for(int i =0; i<array.length;i++)
+            {
+                if(array[i] ==0 )
+                {
+                    done++;
+                }
+                if(max<array[i])
+                {
+                    max= array[i];
+                    index =i;
+                }
+            }
+            System.out.println("you chose " + max + " " + tam[index]);
+            max =0;
+            array[index] = 0;
+
         }
 
-        for(int i = 0; i < balls; ++i) {
-            System.out.println(array[i]);
-        }
+
+
+
 
     }
 }
