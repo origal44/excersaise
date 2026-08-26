@@ -10,22 +10,26 @@ public class BreakfastMain {
         Person[] people = {new Person(),new Person(),new Person(),new Person(),new Person()} ;
         int j;
         int count;
+        int [] counter = new int[5];
         for(int i =0; i< people.length; i++)
         {
             System.out.println("person " + (i+1));
             j=0;
             System.out.println("how many panckes would you like");
             count = scanner.nextInt();
+            counter[i]+=count;
             people[i].amount[j][1] = count;
             j++;
 
             System.out.println("how many toasts would you like");
             count = scanner.nextInt();
+            counter[i]+=count;
             people[i].amount[j][1] = count;
             j++;
 
             System.out.println("how many omelet would you like");
             count = scanner.nextInt();
+            counter[i]+=count;
             people[i].amount[j][1] = count;
 
 
@@ -34,6 +38,8 @@ public class BreakfastMain {
         int Tprice = 60;
         int Oprice = 39;
         int sum =0;
+
+
 
         int[] arraysum = new int[5];
         for(int i=0; i<5; i++)
@@ -49,6 +55,9 @@ public class BreakfastMain {
         int max =0;
         int done =0;
         int index =0;
+        int flag =0;
+        int temp =0;
+        int index2 =0;
         while (done<5){
             for(int i =0; i<5; i++)
             {
@@ -58,14 +67,25 @@ public class BreakfastMain {
                 }
                 if(arraysum[i]>max)
                 {
+                    index2=i-1;
+                    temp= max;
                     max = arraysum[i];
                     index =i;
                 }
 
 
+
             }
-            System.out.println("person " + (index+1) + " your total is " + max);
+            if(temp==max && counter[index2]>counter[index])
+            {
+                System.out.println("person " + (index2+1) + " your total is " + max);
+            }
+            else{
+                System.out.println("person " + (index+1) + " your total is " + max);
+            }
+
             max =0;
+            temp =0;
             arraysum[index] =0;
 
         }
