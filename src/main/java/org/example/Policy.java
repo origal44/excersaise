@@ -5,5 +5,5 @@ package org.example;
 // כדי להוסיף גרסת חוקים חדשה = לכתוב מחלקה חדשה שמממשת את הממשק,
 // בלי לגעת ב-Board. (זו התשובה לשאלה על ה-Design Pattern במסמך.)
 public interface Policy {
-    boolean isLegalMove(Board board, String direction);
+    boolean isLegalMove(Board board, Direction direction);
 }

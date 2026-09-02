@@ -27,19 +27,35 @@ public class CommandFactory {
         this.gameState = gameState;
     }
 
-    // מקבל שורת קלט מלאה (למשל "Move up" או "Load sokoban.txt"),
-    // ומחזיר את אובייקט הפקודה המתאים.
+
     public Command create(String input) {
-        // TODO:
-        //  1. לפצל את input לטוקנים (למשל input.trim().split("\\s+"))
-        //  2. הטוקן הראשון = שם הפקודה ; שאר הטוקנים = פרמטרים
-        //  3. לפי שם הפקודה - ליצור ולהחזיר את ה-Command הנכון:
-        //       "Load"    -> new LoadCommand(loader, fileName)
-        //       "Save"    -> new SaveCommand(save, fileName, board)
-        //       "Move"    -> new MoveCommand(board, direction)
-        //       "Display" -> new DisplayCommand(display, board)
-        //       "Exit"    -> new ExitCommand(gameState)
-        //  4. אם לא זוהתה פקודה - להחזיר null או לזרוק חריגה מתאימה
-        return null;
+        String[] tokens = input.trim().split("\\s+");
+        String name = tokens[0];
+
+        switch (name) {
+            case "Load" -> {
+                String fileName = tokens[1];
+                return new LoadCommand(loader, board, fileName);
+            }
+            case "Save" -> {
+                String fileName = tokens[1];
+                return new SaveCommand(save,fileName,board);
+
+            }
+            case "Move" -> {
+                Direction direction = Direction.valueOf(tokens[1].toUpperCase());
+                return new MoveCommand(board, direction);
+
+            }
+            case "Exit" -> {
+                return new ExitCommand(gameState);
+
+            }
+            case "Display" -> {
+                return new DisplayCommand(display,board);
+            }
+            // TODO: "Save", "Move", "Display", "Exit" — אותה תבנית
+            default -> throw new IllegalArgumentException("Unknown command: " + name);
+        }
     }
 }

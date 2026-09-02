@@ -3,13 +3,35 @@ package org.example;
 // המימוש הרגיל של חוקי Sokoban.
 public class StandardPolicy implements Policy {
     @Override
-    public boolean isLegalMove(Board board, String direction) {
-        // TODO: לממש את שלושת החוקים -
-        //  1. לחשב את המשבצת הבאה לפי direction
-        //  2. אם זו קיר -> return false
-        //  3. אם יש שם קופסה -> לבדוק את המשבצת שאחריה:
-        //       חסומה (קיר/קופסה אחרת) -> false ; פנויה -> true (דוחפים)
-        //  4. אחרת -> true
-        return false;
+    public boolean isLegalMove(Board board, Direction direction) {
+        int x = board.getPlayer().getPosition().getX();
+        int y = board.getPlayer().getPosition().getY();
+        int dx = direction.getDx();
+        int dy = direction.getDy();
+        x += dx;
+        y += dy;
+        Position pos = new Position(x, y);
+
+
+        TileType tileType = board.getGrid()[y][x];
+
+
+        if(tileType == TileType.WALL) {
+            return false;
+        }
+        else if( board.getBoxes().contains(pos)) {
+            TileType nextTileType = board.getGrid()[y+dy][x+dx];
+            Position Nextpos =new Position(x+dx, y+dy);
+            if(nextTileType == TileType.WALL || board.getBoxes().contains(Nextpos)) {
+                return false;
+            }else{
+                return true;
+            }
+
+        }
+
+
+        return true;
+
     }
 }

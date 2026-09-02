@@ -23,7 +23,7 @@ public class Board {
     }
 
     // ה-receiver של MoveCommand.
-    public void move(String direction) {
+    public void move(Direction direction) {
         if (policy.isLegalMove(this, direction)) {
             // TODO: לבצע את התנועה בפועל -
             //  לעדכן את מיקום השחקן, ואת הקופסה אם דוחפים אותה
@@ -31,7 +31,7 @@ public class Board {
         // אם המהלך לא חוקי - פשוט לא עושים כלום
     }
 
-    // getters / setters לפי הצורך
+
     public TileType[][] getGrid() {
         return grid;
     }
@@ -54,5 +54,30 @@ public class Board {
 
     public void setPolicy(Policy policy) {
         this.policy = policy;
+    }
+    public void placeWall(Position pos) {
+        grid[pos.getY()][pos.getX()] = TileType.WALL;
+    }
+
+    public void placeFloor(Position pos) {
+        grid[pos.getY()][pos.getX()] = TileType.FLOOR;
+    }
+
+    public void placeBox(Position pos) {
+        boxes.add(pos);
+    }
+
+    public void placeTarget(Position pos) {
+        targets.add(pos);
+    }
+
+    public void setPlayer(Position pos) {
+        player.setPosition(pos);
+    }
+    public void initGrid(int width, int height) {
+        grid = new TileType[height][width];
+        for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+                grid[y][x] = TileType.FLOOR;
     }
 }
