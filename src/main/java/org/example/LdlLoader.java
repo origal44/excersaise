@@ -1,10 +1,9 @@
 package org.example;
 
 
-public class XmlLoader implements Loader {
+public class LdlLoader implements Loader {
     @Override
     public void load(Board board, String fileName) {
 
-        return ;
     }
 }

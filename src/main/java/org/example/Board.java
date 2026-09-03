@@ -2,16 +2,12 @@ package org.example;
 
 import java.util.Set;
 
-// Board מחזיק את כל מצב הלוח, ומחזיק Player (בלי כפילות של playerPosition).
-// Board הוא ה-receiver של MoveCommand - כאן חי ההיגיון שמבצע את התנועה.
-// אבל הוא לא מחליט לבד מה מותר - הוא מתייעץ עם Policy (Strategy Pattern),
-// שמוזרקת אליו מבחוץ דרך ה-constructor (Dependency Injection).
 public class Board {
     private TileType[][] grid;
     private Player player;
     private Set<Position> boxes;
     private Set<Position> targets;
-    private Policy policy;   // החוזה - לא מימוש ספציפי!
+    private Policy policy;
 
     public Board(TileType[][] grid, Player player, Set<Position> boxes,
                  Set<Position> targets, Policy policy) {
@@ -22,13 +18,22 @@ public class Board {
         this.policy = policy;
     }
 
-    // ה-receiver של MoveCommand.
     public void move(Direction direction) {
         if (policy.isLegalMove(this, direction)) {
-            // TODO: לבצע את התנועה בפועל -
-            //  לעדכן את מיקום השחקן, ואת הקופסה אם דוחפים אותה
+
+            Position dest = new Position(player.getPosition().getX() + direction.getDx(), player.getPosition().getY()+ direction.getDy());
+
+
+            if(boxes.contains(dest)) {
+                Position Ndest = new Position(dest.getX()+direction.getDx(), dest.getY()+direction.getDy());
+                boxes.remove(dest);
+                boxes.add(Ndest);
+
+            }
+            player.setPosition(dest);
+
         }
-        // אם המהלך לא חוקי - פשוט לא עושים כלום
+
     }
 
 

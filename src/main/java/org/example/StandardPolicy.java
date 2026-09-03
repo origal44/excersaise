@@ -1,6 +1,6 @@
 package org.example;
 
-// המימוש הרגיל של חוקי Sokoban.
+
 public class StandardPolicy implements Policy {
     @Override
     public boolean isLegalMove(Board board, Direction direction) {

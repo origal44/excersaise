@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// טוען עבור קבצי txt.
 public class TextLoader implements Loader {
     @Override
     public void load(Board board, String fileName) {

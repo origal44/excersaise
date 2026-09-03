@@ -1,27 +1,18 @@
 package org.example;
 
-// ה-Invoker / "מפרסר הפקודות".
-// אחראי: לקבל שורת קלט מהמשתמש -> לזהות איזו פקודה זו -> ליצור את
-// אובייקט הפקודה המתאים עם ה-receiver והפרמטרים הנכונים.
-//
-// שים לב: אפשר להשתמש כאן ב-HashMap (מפתח = שם הפקודה) כדי להימנע
-// מ-if/else ענק. האתגר: לכל פקודה פרמטרים שונים ויש ליצור אובייקט חדש
-// בכל פעם. שתי גישות אפשריות:
-//  - switch על שם הפקודה שמחזיר Command חדש (פשוט, מספיק לתרגיל)
-//  - map של "יצרני פקודות" (factories) - אלגנטי ומרחיב יותר (מתקדם)
+
 public class CommandFactory {
 
-    // כל ה-receivers שהפקודות עשויות לצרוך. מוזרקים מבחוץ (DI).
+
     private Board board;
-    private Loader loader;
     private Save save;
     private Display display;
     private GameState gameState;
+    private LoaderRegistry loaderRegistry;
 
-    public CommandFactory(Board board, Loader loader, Save save,
-                          Display display, GameState gameState) {
+    public CommandFactory(Board board, LoaderRegistry loaderRegistry, Save save, Display display, GameState gameState) {
         this.board = board;
-        this.loader = loader;
+        this.loaderRegistry = loaderRegistry;
         this.save = save;
         this.display = display;
         this.gameState = gameState;
@@ -35,6 +26,7 @@ public class CommandFactory {
         switch (name) {
             case "Load" -> {
                 String fileName = tokens[1];
+                Loader loader = loaderRegistry.getLoaderFor(fileName);
                 return new LoadCommand(loader, board, fileName);
             }
             case "Save" -> {
@@ -54,7 +46,7 @@ public class CommandFactory {
             case "Display" -> {
                 return new DisplayCommand(display,board);
             }
-            // TODO: "Save", "Move", "Display", "Exit" — אותה תבנית
+
             default -> throw new IllegalArgumentException("Unknown command: " + name);
         }
     }

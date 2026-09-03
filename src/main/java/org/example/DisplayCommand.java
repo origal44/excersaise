@@ -1,6 +1,6 @@
 package org.example;
 
-// פקודת הצגה. receiver = Display, וצריך גם את ה-Board להציג.
+
 public class DisplayCommand implements Command {
     private Display display;   // ה-receiver
     private Board board;       // מה מציגים
