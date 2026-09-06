@@ -1,70 +1,51 @@
 package org.example;
 
-import java.io.PrintStream;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class IceCream {
+
+    public static void displayOptions() {
+        System.out.println("this is our options:");
+
+        for(Flavors flavor : Flavors.values()) {
+            System.out.print(flavor + " " + flavor.getCode() + " ");
+        }
+
+    }
     static void main() {
-        int[] array = new int[5];
         Scanner scanner = new Scanner(System.in);
         System.out.println("please choose a amount of balls");
         int balls = scanner.nextInt();
         int answer = -1;
         if (balls > 5) {
-            System.out.println("you need a diet you fat nigero");
+            System.out.println("5 balls MAX");
             System.exit(0);
         }
 
-        System.out.println("this is our options:");
-
-        for(Flavors flavor : Flavors.values()) {
-            System.out.print(flavor + " " + flavor.GetCode() + " ");
-        }
+        displayOptions();
 
 
         int count = balls;
-
+        Map<Flavors,Integer> tastes = new HashMap<>();
         while(count != 0) {
             System.out.println(" please enter a flavor");
             answer = scanner.nextInt();
-            if(answer<5 && answer>=0)
-            {
-                array[answer]++;
+
+            Flavors chosen = Flavors.fromCode(answer);
+            if (chosen != null) {
+                tastes.put(chosen, tastes.getOrDefault(chosen, 0) + 1);
                 count--;
-            }
-            else{
+            } else {
                 System.out.println("Error this flavor doesnt exist ");
             }
 
         }
-        int max=-0;
-        int done=0;
-        int index =0;
-
-        Flavors[] tam = {Flavors.chocolate,Flavors.vanilla,Flavors.oreos,Flavors.ferro,Flavors.strawberry};
-
-        while(done<array.length)
-        {
-            for(int i =0; i<array.length;i++)
-            {
-                if(array[i] ==0 )
-                {
-                    done++;
-                }
-                if(max<array[i])
-                {
-                    max= array[i];
-                    index =i;
-                }
-            }
-            System.out.println("you chose " + max + " " + tam[index]);
-            max =0;
-            array[index] = 0;
-
-        }
-
-
-
+        tastes.entrySet().stream()
+                .sorted(Map.Entry.<Flavors, Integer>comparingByValue().reversed())
+                .forEach(entry -> System.out.println(entry.getKey() + " " + entry.getValue()));
 
 
     }
