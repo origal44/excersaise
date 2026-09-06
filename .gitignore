@@ -1,0 +1,9 @@
+/.idea/encodings.xml
+/.idea/compiler.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/vcs.xml
+/target/classes/org/example/Flavors.class
+/target/classes/org/example/IceCream.class
+target/
+.idea/
