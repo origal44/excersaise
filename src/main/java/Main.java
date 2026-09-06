@@ -9,20 +9,16 @@ public class Main {
         System.out.println("cola-1,colaZero-2,Sprite-3,fanta-4,fuzetea-5");
         int code = scanner.nextInt();
 
-        if(code>5 || code<1){
+        while(code>5 || code<1){
             System.out.println("pls enter a valid number");
+             code = scanner.nextInt();
 
         }
-        else {
-            Drinks var = null;
-            for (Drinks drink : Drinks.values()) {
-                if (drink.GetCode() == code) {
-                    var = drink;
-                    break;
-                }
-            }
+
+            Drinks var = Drinks.fromCode(code);
+
             System.out.println("you chose : " + var);
-        }
+
 
         }
     }
