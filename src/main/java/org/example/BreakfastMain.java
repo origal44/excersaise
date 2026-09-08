@@ -21,7 +21,7 @@ public class BreakfastMain {
                 quantities[item.getCode()] = scanner.nextInt();
             }
 
-            people[i] = new Person(quantities, i+1);
+            people[i] = new Person(quantities);
         }
         Arrays.sort(people, Comparator.comparingInt(Person::getTotal).reversed());
 
