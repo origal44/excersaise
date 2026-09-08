@@ -23,6 +23,8 @@ public class BreakfastMain {
 
             people[i] = new Person(quantities);
         }
+        people[0].getQuantities();
+
         Arrays.sort(people, Comparator.comparingInt(Person::getTotal).reversed());
 
         for(int i = 0; i < people.length; i++)

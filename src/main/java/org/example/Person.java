@@ -1,5 +1,10 @@
 package org.example;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Person {
 
     private int[] quantities;
@@ -21,17 +26,7 @@ public class Person {
         calculateTotal();
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public int getTotal() {
-        return total;
-    }
-
-    public int[] getQuantities() {
-        return quantities;
-    }
 
     public void calculateTotal() {
         int sum = 0;
