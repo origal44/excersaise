@@ -46,6 +46,10 @@ public class CommandFactory {
             case "Display" -> {
                 return new DisplayCommand(display,board);
             }
+            case "Help" -> {
+                return new HelpCommand(display);
+            }
+
 
             default -> throw new IllegalArgumentException("Unknown command: " + name);
         }

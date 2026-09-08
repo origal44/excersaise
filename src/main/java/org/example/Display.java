@@ -5,6 +5,20 @@ import java.util.Set;
 
 public class Display {
 
+    private static final String INSTRUCTIONS = """
+        === Sokoban — Commands ===
+        Load <file>   - load a level
+        Move <up|down|left|right> - move the player
+        Display       - show the board
+        Save <file>   - save the game
+        Help          - show this help
+        Exit          - quit the game
+        """;
+
+    public void showInstructions() {
+        System.out.println(INSTRUCTIONS);
+    }
+
 
     public void show(Board board) {
         TileType[][] grid = board.getGrid();

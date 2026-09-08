@@ -1,6 +1,5 @@
 package org.example;
 
-// פקודת תנועה. receiver = Board, parameter = direction ("up"/"down"/...).
 public class MoveCommand implements Command {
     private Board board;        // ה-receiver
     private Direction direction;   // הפרמטר

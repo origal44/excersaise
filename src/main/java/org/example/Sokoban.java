@@ -5,6 +5,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Sokoban {
+    public  void instructions()
+    {
+        System.out.println();
+    }
     public static void main(String[] args) {
 
         GameState gameState = new GameState();
@@ -24,6 +28,8 @@ public class Sokoban {
         Scanner scanner = new Scanner(System.in);
         while (gameState.isRunning()) {
             System.out.print("> ");
+            System.out.println("Please Type Help for instructions");
+
             String input = scanner.nextLine();
             try {
                 Command cmd = factory.create(input);
